@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Document</title>
+
+      {% load static %}
+      <!-- <link rel="stylesheet" href="style.css"/> -->
+      <style>
+	body {
+        background-color: #21222c;
+	}
+	.user-message {
+        background-color: #d9edf7;
+        border-radius: 5px;
+        padding: 5px 10px;
+        display: inline-block;
+        max-width: 70%;
+        }
+	.bot-message {
+        background-color: #f5f5f5;
+        border-radius: 5px;
+        padding: 5px 10px;
+        display: inline-block;
+        max-width: 70%;
+        }
+	.container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #fff;
+        box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 30px;
+        }
+	#chatbot{
+	margin-left: auto;
+	margin-right: auto;
+	width: 80%;
+	margin-top: 50px;
+	border-radius: 10px;
+	border: 1px solid gray;
+	padding: 10px;
+	}
+        .chat-window {
+        height: 250px;
+        overflow-y: scroll;
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin-bottom: 10px;
+        }
+        .boxText{
+	font-family: monospace;
+	font-size: 14px;
+	text-align: left;
+	line-height: 25px;
+	color: rgb(109,111,109);
+	}
+	.userText{
+	text-align: right;
+	font-family: monospace;
+	font-size: 14px;
+	line-height: 25px;
+	color: rgb(109,111,109);
+	}
+	#userInput{
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 40px;
+	width: 50%;
+	text-align: center;
+	}
+	#textInput{
+	border: 3px solid white;
+	border-bottom: 3px solid #afafaf;
+	font-family: monospace;
+	font-size: 14px;
+	width: 70%;
+	padding: 16px;
+	color: red;
+	}
+	#buttonInput{
+	width: 15%;
+  	color: #FFFFFF;
+  	font-size: 20px;
+  	border-radius: 5px;
+  	border: solid 1px #3866a3;
+  	text-shadow: 1px 1px 0px #528ECC;
+  	box-shadow: inset 1px 1px 0px 0px #BBDAF7;
+  	text-decoration: none;
+  	cursor: pointer;
+  	position: relative;
+  	overflow: hidden;
+  	font-family: Arial;
+  	background: linear-gradient(180deg, #63B8EE 10%, #468CCF 100%);
+  	display: inline-flex;
+  	align-items: center;
+  	padding: 0;
+	}
+	h1{
+	text-align: center;
+	color: rgb(57,72,57);
+	}
+	
+      </style>
+
+      <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="container">
+<center>
+<h1>ChatBot</h1>
+<img src="https://www.eleconomista.com.mx/__export/1588814448485/sites/eleconomista/img/2020/05/06/logo_totalplay.png_164405516.png" width="200" height="50">
+</center>
+   <div>
+   <div id="chatbot" class="chat-window">
+     <p class="botText"><span>Hola, este es el chat de Totalplay</span></p>
+     <p class="botText"><span>¿En que puedo ayudarte?</span></p>
+   </div>
+   <div id="userInput">
+	<input type="text" id="textInput" name="userMessage" placeholder="Escriba algo al chat de Totalplay..."/>
+	<input type="submit" value="Enter" id="buttonInput" />
+   </div>
+   </div>
+</div>
+  <script>
+	function getUserResponse(){
+             var userText = $('#textInput').val();
+	     var userHTML = "<p class='userText'><span><div class='user-message'>Cliente: "+userText+"</div></span></p>";
+             $('#textInput').val("");
+             $('#chatbot').append(userHTML);
+
+	     $.get('getResponse',{userMessage:userText}).done(function(data){
+		var returnedMessage = "<p class = 'botText'><div class='bot-message'>BotTP: "+data+"</div></p>";
+		   $('#chatbot').append(returnedMessage);
+		})
+        }
+        $('#buttonInput').click(function(){
+             getUserResponse();
+        })
+  </script>
+</body>
+</html>
