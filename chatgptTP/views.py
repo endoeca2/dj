@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from dotenv import load_dotenv
 load_dotenv()
 
-api_key = "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"
+api_key = "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"
 print(api_key)
 
 def getResponse(request):

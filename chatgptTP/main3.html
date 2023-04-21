@@ -4,7 +4,7 @@
       <meta charset="UTF-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Document</title>
+      <title>Asistente Virtual</title>
 
       {% load static %}
       <!-- <link rel="stylesheet" href="style.css"/> -->
@@ -18,6 +18,7 @@
         padding: 5px 10px;
         display: inline-block;
         max-width: 70%;
+	font-family: Arial;
         }
 	.bot-message {
         background-color: #f5f5f5;
@@ -25,6 +26,7 @@
         padding: 5px 10px;
         display: inline-block;
         max-width: 70%;
+	font-family: Arial;
         }
 	.container {
         max-width: 800px;
@@ -34,14 +36,18 @@
         box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
         border-radius: 30px;
         }
+	.container2{
+	display: flex;
+	}
 	#chatbot{
 	margin-left: auto;
 	margin-right: auto;
 	width: 80%;
-	margin-top: 50px;
+	margin-top: 10px;
 	border-radius: 10px;
 	border: 1px solid gray;
 	padding: 10px;
+	font-family: Arial;
 	}
         .chat-window {
         height: 250px;
@@ -49,6 +55,7 @@
         border: 1px solid #ccc;
         padding: 10px;
         margin-bottom: 10px;
+	font-family: Arial;
         }
         .boxText{
 	font-family: monospace;
@@ -56,6 +63,7 @@
 	text-align: left;
 	line-height: 25px;
 	color: rgb(109,111,109);
+	font-family: Arial;
 	}
 	.userText{
 	text-align: right;
@@ -63,6 +71,7 @@
 	font-size: 14px;
 	line-height: 25px;
 	color: rgb(109,111,109);
+	font-family: Arial;
 	}
 	#userInput{
 	margin-left: auto;
@@ -70,6 +79,7 @@
 	margin-top: 40px;
 	width: 50%;
 	text-align: center;
+	font-family: Arial;
 	}
 	#textInput{
 	border: 3px solid white;
@@ -78,7 +88,8 @@
 	font-size: 14px;
 	width: 70%;
 	padding: 16px;
-	color: red;
+	color: gray;
+	font-family: Arial;
 	}
 	#buttonInput{
 	width: 15%;
@@ -99,34 +110,51 @@
   	padding: 0;
 	}
 	h1{
-	text-align: center;
-	color: rgb(57,72,57);
+	color: black;
+	margin-top: 60px;
+	margin-left: 100px;
+	margin-right: 100px;
+	text-align: right;
+	font-family: Arial;
 	}
-	
+	img{
+	margin-top: 50px;
+	margin-left: 100px;
+	margin-bottom: 50px;
+	}
       </style>
 
       <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
 </head>
 <body>
 <div class="container">
-<center>
-<h1>ChatBot</h1>
-<img src="https://www.eleconomista.com.mx/__export/1588814448485/sites/eleconomista/img/2020/05/06/logo_totalplay.png_164405516.png" width="200" height="50">
-</center>
+<div class="container2">
+<img src="https://www.eleconomista.com.mx/__export/1588814448485/sites/eleconomista/img/2020/05/06/logo_totalplay.png_164405516.png" width="200" height="50" align="left">
+<h1>Asistente virtual</h1>
+</div>
    <div>
    <div id="chatbot" class="chat-window">
      <p class="botText"><span>Hola, este es el chat de Totalplay</span></p>
      <p class="botText"><span>¿En que puedo ayudarte?</span></p>
    </div>
    <div id="userInput">
-	<input type="text" id="textInput" name="userMessage" placeholder="Escriba algo al chat de Totalplay..."/>
-	<input type="submit" value="Enter" id="buttonInput" />
+	<form action="#">
+	<input type="text" id="textInput" name="userMessage" class="chat-input" placeholder="Escriba algo al chat de Totalplay..."/>
+	<input type="submit" value="Enter" id="buttonInput"/>
+	</form>
    </div>
    </div>
 </div>
   <script>
 	function getUserResponse(){
              var userText = $('#textInput').val();
+
+	     // Verificar si el campo está vacío
+             if (userText.trim() === '') {
+                 alert('Por favor, escriba algo antes de enviar el mensaje.');
+                 return;
+             }
+             
 	     var userHTML = "<p class='userText'><span><div class='user-message'>Cliente: "+userText+"</div></span></p>";
              $('#textInput').val("");
              $('#chatbot').append(userHTML);
